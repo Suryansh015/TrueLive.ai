@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HeroSection.module.css";
-//removed stuff
+//removed import bgImage from "./BGimage.jpg";
+import { color, motion } from "framer-motion";
 import { auth } from "../Login/firebase";
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
-  //removed stuff
+  
+  // removed const [youtubeURL, setYoutubeURL] = useState("");
+  const [articleURL, setArticleURL] = useState("");
+  const [newsURL, setNewsURL] = useState("");
+  // removed const [youtubeResults, setYoutubeResults] = useState(null);
+  const [articleResults, setArticleResults] = useState(null);
+  const [summaryData, setSummaryData] = useState(null);
+  
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
