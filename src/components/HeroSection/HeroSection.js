@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HeroSection.module.css";
-import bgImage from "./BGimage.jpg";
-import { color, motion } from "framer-motion";
+//removed stuff
 import { auth } from "../Login/firebase";
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
-
-  const [youtubeURL, setYoutubeURL] = useState("");
-  const [articleURL, setArticleURL] = useState("");
-  const [newsURL, setNewsURL] = useState("");
-  const [youtubeResults, setYoutubeResults] = useState(null);
-  const [articleResults, setArticleResults] = useState(null);
-  const [summaryData, setSummaryData] = useState(null);
+  //removed stuff
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
@@ -43,11 +36,7 @@ const HeroSection = () => {
     }
   };
 
-  const textVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
+  //removed text varients
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setIsSignedIn(!!user);
@@ -67,20 +56,9 @@ const HeroSection = () => {
     setModalOpen(false);
   };
 
-  const redirectToLogin = () => {
-    window.location.href = "/login";
-  };
+  //removed redirectToLogin 
 
-  const handlePaste = async (type) => {
-    try {
-      const clipboardText = await navigator.clipboard.readText();
-      if (type === "youtube") setYoutubeURL(clipboardText);
-      if (type === "article") setArticleURL(clipboardText);
-      if (type === "news") setNewsURL(clipboardText);
-    } catch (err) {
-      console.error("Failed to read clipboard contents: ", err);
-    }
-  };
+  //removed handlePaste
 
   const handleYouTubeAnalysis = async (file) => {
     console.log("Selected File:", file); 
