@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HeroSection.module.css";
 //removed import bgImage from "./BGimage.jpg";
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion"; //removed color
 import { auth } from "../Login/firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -13,8 +13,8 @@ const HeroSection = () => {
   const [articleURL, setArticleURL] = useState("");
   const [newsURL, setNewsURL] = useState("");
   // removed const [youtubeResults, setYoutubeResults] = useState(null);
-  const [articleResults, setArticleResults] = useState(null);
-  const [summaryData, setSummaryData] = useState(null);
+  const [setArticleResults] = useState(null); //removed article results
+  const [setSummaryData] = useState(null); //removed summaryData
   
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
