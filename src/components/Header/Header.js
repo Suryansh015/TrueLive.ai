@@ -19,12 +19,7 @@ const Header = ({ user }) => {
     navigate("/login");
   };
 
-  // Function to truncate email
-  const truncateEmail = (email) => {
-    const [name, domain] = email.split("@");
-    const truncatedName = name.length > 5 ? `${name.substring(0, 5)}...` : name;
-    return `${truncatedName}@${domain}`;
-  };
+  //removed const truncateEmail 
 
   const handleContactClick = () => {
     // Scroll to the Contact Us section in ExtraStuff component
