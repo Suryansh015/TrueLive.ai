@@ -4,12 +4,12 @@ import styles from "./TrendingNews.module.css";
 const TrendingNews = () => {
   const [news, setNews] = useState([]); // State to store news data
   const [loading, setLoading] = useState(true); // State to handle loading
-  const keywords = ["technology", "health", "sports", "business", "science"]; // List of random keywords
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
         setLoading(true); // Ensure loading state is reset
+        const keywords = ["technology", "health", "sports", "business", "science"]; // List of random keywords
         const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)]; // Pick a random keyword
         const response = await fetch(
           `https://newsapi.org/v2/everything?q=${randomKeyword}&apiKey=f2b9f8a68aea4a5dacd81bc2615c96c3`
@@ -35,7 +35,7 @@ const TrendingNews = () => {
     };
 
     fetchNews();
-  }, [keywords]); // Run only once when the component mounts
+  }, []); // Run only once when the component mounts
 
   return (
     <section className={styles.newsSection}>
