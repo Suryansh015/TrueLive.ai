@@ -53,7 +53,7 @@ const HeroSection = () => {
       setIsSignedIn(!!user);
     });
     return () => unsubscribe();
-  }, []);
+  }, [setUser]);
 
   const handleGetStartedClick = () => {
     if (!isSignedIn) {
