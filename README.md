@@ -69,7 +69,7 @@ Follow these steps to set up the project locally:
 #### Clone the Repository
 
 ```bash
-git clone https://github.com/svsaurav95/True_live.ai.git
+git clone https://github.com/Suryansh015/TrueLive.ai.git
 cd True_live.ai
 ```
 
@@ -130,12 +130,4 @@ The React app should be available at `http://localhost:3000`.
 This project is licensed under the [MIT License](LICENSE).
 
 ---
-
-### Author
-
-Developed by **Team Digi Dynamos**. 
-For inquiries, please contact [svsaurav95@gmail.com](mailto\:svsaurav95@gmail.com).
-
----
-
 
