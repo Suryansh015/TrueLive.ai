@@ -70,7 +70,7 @@ Follow these steps to set up the project locally:
 
 ```bash
 git clone https://github.com/Suryansh015/TrueLive.ai.git
-cd True_live.ai
+cd TrueLive.ai
 ```
 
 #### Set Up Virtual Environment
