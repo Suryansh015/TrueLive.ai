@@ -35,7 +35,7 @@ const TrendingNews = () => {
     };
 
     fetchNews();
-  }, []); // Run only once when the component mounts
+  }, [keywords]); // Run only once when the component mounts
 
   return (
     <section className={styles.newsSection}>
