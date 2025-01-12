@@ -1,0 +1,357 @@
+/* Hero Content */
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Full height of the hero section */
+}
+
+.heroContent.blurred {
+  filter: blur(5px);
+}
+
+/* Get Started Button */
+.getStartedBtn {
+  margin-top: 80px; /* Reduced to create proper spacing */
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  position: relative;
+
+  /* Gradient and hover effects */
+  background-color: #b626d3; /* Fallback for old browsers */
+  background-image: linear-gradient(to right, #b626d3, #d73cae, #fa5584);
+}
+
+.getStartedBtn:hover {
+  background-image: linear-gradient(to right, #701483, #8e2873, #a33957);
+  transform: scale(1.05); /* Slightly enlarge the button */
+  outline: 2px solid yellow; /* Add yellow outline */
+  outline-offset: 2px; /* Space between button and outline */
+}
+
+.getStartedBtn:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6), 0 0 20px rgba(0, 123, 255, 0.4);
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Modal Content */
+.modalContent {
+  background: #1e1e2c;
+  padding: 40px;
+  padding-right: 640px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 700px;
+  color: white;
+  background: linear-gradient(to left, rgb(0, 34, 75), rgb(0, 0, 0), rgb(0, 34, 75));
+}
+
+.modalContent h2 {
+  margin-bottom: 15px;
+}
+
+.modalContent button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modalContent button:hover {
+  background-color: #0056b3;
+}
+
+/* Input styles */
+.modalContent input[type="text"] {
+  width: 95%;
+  padding: 12px;
+  margin: 50px 0;
+  margin-left: -5px;
+  margin-right: 160px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background-color: #2d2d3e;
+  color: white;
+  margin-top: 30px;
+}
+
+.modalContent input[type="text"]::placeholder {
+  color: #888;
+}
+
+/* Paste button */
+.modalContent .pasteButton {
+  position: absolute;
+  right: 4px;
+  top: 111.5px;
+  background: #3e3e5b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Three Windows Layout */
+.threeWindows {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.window {
+  flex: none;
+  width: 52.1%;
+  min-width: 300px;
+  padding: 20px;
+  background: transparent;
+  border: 1px solid #ffef3f;
+  border-radius: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-height: 600px; /* Adjust the max height as needed */
+}
+
+
+.window h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #ffffff;
+  background-color: #3e3e5b;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+
+.uploadSection button {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.uploadSection button:hover {
+  background-color: #5b4bc2;
+}
+
+
+/* Modal Content for Login Screen */
+.modalContent.loginWindow {
+  background: #1e1e2c;
+  padding: 40px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 700px;
+  color: white;
+}
+
+/* Login Window Specific Styles */
+.loginWindow h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.loginWindow p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.loginWindow button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loginWindow button:hover {
+  background-color: #0056b3;
+}
+
+/* Wrapper for alignment */
+.typingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content */
+  position: relative; /* Ensures button stays in place */
+}
+
+/* Typing animation */
+.typingAnimation {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid white; /* Cursor effect */
+  width: 18ch; /* Adjust width to match text length */
+  animation: typing 2.5s steps(18, end), blink-caret 3.5s steps(18, end), cursor-fade 0.1s ease 2s forwards;
+  margin-bottom: 20px; /* Add spacing below the animation */
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 18ch; /* Matches the length of "Into Awareness" */
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: white;
+  }
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes cursor-fade {
+  to {
+    border-color: transparent;
+  }
+}
+
+.fileUploadContainer {
+  position: relative;
+  width: 80%; /* Use percentage for responsiveness */
+  padding: 8px;
+  margin: 20px 0;
+}
+
+.fileInput {
+  width: 80%; /* Ensure the file input is fully responsive */
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2d2d3e;
+  color: white;
+  font-size: 1rem;
+  margin-left: 38px;
+}
+
+/* Divider with 'or' text */
+.divider {
+  margin: 20px 0;
+  position: relative;
+  width: 100%;
+  margin-top: -10px;
+}
+
+.divider::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.orText {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222;
+  padding: 0 10px;
+  color: #fff;
+}
+
+
+.analyzeButton {
+  margin-top: 80px; /* Reduced to create proper spacing */
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.0rem;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  position: relative;
+
+  /* Gradient and hover effects */
+  background-color: #b626d3; /* Fallback for old browsers */
+  background-image: linear-gradient(to right, #b626d3, #d73cae, #fa5584);
+}
+
+.analyzeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.analyzeButton:hover {
+  background-image: linear-gradient(to right, #701483, #8e2873, #a33957);
+  transform: scale(1.05); 
+}
+
+
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Upload Section */
+.uploadSection {
+  text-align: center;
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px dotted #ccc; /* Dotted border */
+  border-radius: 5px; 
+}
+
+.uploadSection p {
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #ccc;
+}

@@ -1,0 +1,110 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items:center; /* Aligns all items vertically in the center */
+  padding: 1rem 2rem;
+  background: linear-gradient(
+      to left, 
+      rgb(0, 0, 0), /* Left side darker */
+      rgb(0, 0, 0), /* Main Color (lighter center) */
+      rgb(0, 34, 75)/* Right side darker */
+  );
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  color: #ffef3f;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  justify-content: center; /* Centers the navigation items */
+  gap: 3.5rem; /* Increased gap for better spacing */
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  margin-left: 730px; /* Ensures the nav section grows evenly */
+}
+
+.navList li {
+  cursor: pointer;
+  color: #ffffff;
+  transition: color 0.2s ease, transform 0.3s;
+}
+
+.navList li:hover {
+  color: #ffef3f;
+  transform: scale(1.1);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center; /* Vertically centers the profile picture and email */
+}
+
+.profilePic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  margin-right: 30px;
+}
+
+.logoutBtn,
+.loginBtn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.logoutBtn:hover,
+.loginBtn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.logoutBtn {
+  background-color: #ff4d4d;
+}
+
+.logoutBtn:hover {
+  background-color: #e60000;
+}
+
+.loginBtn {
+  background-color: #ffef3f;
+  color: #000;
+}
+
+.loginBtn:hover {
+  background-color: #9a7400;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.contactLink {
+  text-decoration: none;
+}
+
+.contactLink:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
