@@ -20,8 +20,8 @@ const HeroSection = () => {
 
   const handlePastearticleClick = async () => {
     try {
-      const text = await navigator.clipboard.readText();
-      setArticleURL(text); 
+      const text = await navigator.clipboard.readText(); // Read from clipboard
+      setArticleURL(text); // Set the pasted text into the input field
     } catch (error) {
       console.error("Failed to read clipboard contents:", error);
     }
@@ -68,7 +68,7 @@ const HeroSection = () => {
     if (!isSignedIn) {
       navigate("/login"); // Redirect only if the user is not signed in
     } else {
-      setModalOpen(true); 
+      setModalOpen(true); // Open modal if the user is signed in
     }
   };
 
@@ -198,7 +198,7 @@ const HeroSection = () => {
           <p><strong>Claim Status:</strong> <span class="status"> ${data.claim_verification.status}</span></p>
         </div>
         <div class="result-section">
-          <p><strong>Confidence:</strong> ${data.claim_verification.confidence}</p>
+          <p><strong>Confidence:</strong> ${data.claim_verification.confidence}%</p>
         </div>
         <div class="speedometer">
           <svg width="150" height="150">
@@ -213,43 +213,46 @@ const HeroSection = () => {
         </div>
       </div>
       <script>
-        const claim_status = ${data.claim_verification.status};
-        const confidence = ${data.claim_verification.confidence}; 
-        
-        const progressCircle = document.querySelector('.progress');
-        const percentageText = document.querySelector('.percentage');
-        const statusElement = document.querySelector('.status'); // Selecting the status element
-        const radius = 70; // Radius of the circle
-        const circumference = 2 * Math.PI * radius; // Circumference of the circle
+  const confidence = ${data.claim_verification.confidence};
+  const status = "${data.claim_verification.status}"; // Add quotes here
+  
+  const progressCircle = document.querySelector('.progress');
+  const percentageText = document.querySelector('.percentage');
+  const statusElement = document.querySelector('.status');
+  const radius = 70;
+  const circumference = 2 * Math.PI * radius;
 
-        // Set up the initial values for the circle
-        progressCircle.style.strokeDasharray = circumference;
-        progressCircle.style.strokeDashoffset = circumference;
+  // Set up the initial values for the circle
+  progressCircle.style.strokeDasharray = circumference;
+  progressCircle.style.strokeDashoffset = circumference;
 
-        if (claim_status == "Unverified") {
-          statusElement.style.backgroundColor = "rgb(255, 69, 58)"; // Change background to red
-        }
+  // Set status color based on verification result
+  if (status.toLowerCase() === "unverified") {
+    statusElement.style.backgroundColor = "rgb(255, 69, 58)";
+  } else {
+    statusElement.style.backgroundColor = "rgb(50, 176, 36)";
+  }
 
-        // Animate the progress circle and percentage
-        let currentPercentage = 0;
-        const animationDuration = 1500; // Animation duration in milliseconds
-        const intervalTime = 15; // Interval time for updating the percentage text
-        const totalSteps = animationDuration / intervalTime; // Total steps in the animation
-        const percentageStep = confidence / totalSteps; // Step size for percentage increment
+  let currentPercentage = 0;
+  const animationDuration = 1500;
+  const intervalTime = 15;
+  const totalSteps = animationDuration / intervalTime;
+  const percentageStep = confidence / totalSteps;
 
-        const animationInterval = setInterval(() => {
-          if (currentPercentage < confidence) {
-            currentPercentage += percentageStep;
-            const progress = (1 - currentPercentage / 100) * circumference;
-            progressCircle.style.strokeDashoffset = progress;
-            percentageText.textContent = \\${Math.round(currentPercentage)}%\;
-          } else {
-            clearInterval(animationInterval);
-            percentageText.textContent = \\${confidence}%\; // Ensure the percentage matches exactly
-            progressCircle.style.strokeDashoffset = (1 - confidence / 100) * circumference;
-          }
-        }, intervalTime);
-      </script>
+  const animationInterval = setInterval(() => {
+    if (currentPercentage < confidence) {
+      currentPercentage += percentageStep;
+      const progress = (1 - currentPercentage / 100) * circumference;
+      progressCircle.style.strokeDashoffset = progress;
+      percentageText.textContent = \`\${Math.round(currentPercentage)}%\`;
+    } else {
+      clearInterval(animationInterval);
+      percentageText.textContent = \`\${confidence}%\`;
+      const finalProgress = (1 - confidence / 100) * circumference;
+      progressCircle.style.strokeDashoffset = finalProgress;
+    }
+  }, intervalTime);
+</script>
     </body>
   </html>
           `);
@@ -275,7 +278,6 @@ const HeroSection = () => {
         body: JSON.stringify({ url: articleURL }),
       });
       const data = await response.json();
-      setArticleResults(data);
 
       const articleWindow = window.open("", "_blank", "width=800,height=600");
 articleWindow.document.write(`
@@ -386,43 +388,46 @@ articleWindow.document.write(`
         </div>
       </div>
       <script>
-        const claim_status = ${data.claim_verification.status};
-        const confidence = ${data.claim_verification.confidence}; 
-        
-        const progressCircle = document.querySelector('.progress');
-        const percentageText = document.querySelector('.percentage');
-        const statusElement = document.querySelector('.status'); // Selecting the status element
-        const radius = 70; // Radius of the circle
-        const circumference = 2 * Math.PI * radius; // Circumference of the circle
+  const confidence = ${data.claim_verification.confidence};
+  const status = "${data.claim_verification.status}"; // Add quotes here
+  
+  const progressCircle = document.querySelector('.progress');
+  const percentageText = document.querySelector('.percentage');
+  const statusElement = document.querySelector('.status');
+  const radius = 70;
+  const circumference = 2 * Math.PI * radius;
 
-        // Set up the initial values for the circle
-        progressCircle.style.strokeDasharray = circumference;
-        progressCircle.style.strokeDashoffset = circumference;
+  // Set up the initial values for the circle
+  progressCircle.style.strokeDasharray = circumference;
+  progressCircle.style.strokeDashoffset = circumference;
 
-        if (claim_status == "Unverified") {
-          statusElement.style.backgroundColor = "rgb(255, 69, 58)"; // Change background to red
-        }
+  // Set status color based on verification result
+  if (status.toLowerCase() === "unverified") {
+    statusElement.style.backgroundColor = "rgb(255, 69, 58)";
+  } else {
+    statusElement.style.backgroundColor = "rgb(50, 176, 36)";
+  }
 
-        // Animate the progress circle and percentage
-        let currentPercentage = 0;
-        const animationDuration = 1500; // Animation duration in milliseconds
-        const intervalTime = 15; // Interval time for updating the percentage text
-        const totalSteps = animationDuration / intervalTime; // Total steps in the animation
-        const percentageStep = confidence / totalSteps; // Step size for percentage increment
+  let currentPercentage = 0;
+  const animationDuration = 1500;
+  const intervalTime = 15;
+  const totalSteps = animationDuration / intervalTime;
+  const percentageStep = confidence / totalSteps;
 
-        const animationInterval = setInterval(() => {
-          if (currentPercentage < confidence) {
-            currentPercentage += percentageStep;
-            const progress = (1 - currentPercentage / 100) * circumference;
-            progressCircle.style.strokeDashoffset = progress;
-            percentageText.textContent = \\${Math.round(currentPercentage)}%\;
-          } else {
-            clearInterval(animationInterval);
-            percentageText.textContent = \\${confidence}%\; // Ensure the percentage matches exactly
-            progressCircle.style.strokeDashoffset = (1 - confidence / 100) * circumference;
-          }
-        }, intervalTime);
-      </script>
+  const animationInterval = setInterval(() => {
+    if (currentPercentage < confidence) {
+      currentPercentage += percentageStep;
+      const progress = (1 - currentPercentage / 100) * circumference;
+      progressCircle.style.strokeDashoffset = progress;
+      percentageText.textContent = \`\${Math.round(currentPercentage)}%\`;
+    } else {
+      clearInterval(animationInterval);
+      percentageText.textContent = \`\${confidence}%\`;
+      const finalProgress = (1 - confidence / 100) * circumference;
+      progressCircle.style.strokeDashoffset = finalProgress;
+    }
+  }, intervalTime);
+</script>
     </body>
   </html>
 `);
@@ -533,7 +538,7 @@ articleWindow.document.write(`
   return (
     <section style={{marginTop: "40px"}}>
       <div
-        className={${styles.heroContent} ${isModalOpen ? styles.blurred : ""}}
+        className={`${styles.heroContent} ${isModalOpen ? styles.blurred : ""}`}
         style={{
           background: "linear-gradient(to left, rgb(0, 0, 0), rgb(0, 0, 0), rgb(0, 34, 75))",
           backgroundPosition: "center",
@@ -562,11 +567,11 @@ articleWindow.document.write(`
             Into Awareness
           </h1>
           <motion.button
-            className={${styles.getStartedBtn} text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium}
+            className={`${styles.getStartedBtn} text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium`}
             onClick={handleGetStartedClick}
             style={{
               color: "white",
-              textShadow: "2px 2px 8px rgba(0, 0, 0, 0.8)", 
+              textShadow: "2px 2px 8px rgba(0, 0, 0, 0.8)", // Add shadow to the button text
             }}
           >
             Get Started
