@@ -12,8 +12,8 @@ useEffect(() => {
       setLoading(true); // Ensure loading state is reset
       const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)]; // Pick a random keyword
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${randomKeyword}&apiKey=f2b9f8a68aea4a5dacd81bc2615c96c3`
-      );
+          `https://newsapi.org/v2/everything?q=${randomKeyword}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+        );        
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
