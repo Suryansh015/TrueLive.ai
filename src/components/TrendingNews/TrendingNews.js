@@ -6,37 +6,36 @@ const TrendingNews = () => {
   const [loading, setLoading] = useState(true); // State to handle loading
   const keywords = ["technology", "health", "sports", "business", "science"]; // List of random keywords
 
-useEffect(() => {
-  const fetchNews = async () => {
-    try {
-      setLoading(true); // Ensure loading state is reset
-      const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)]; // Pick a random keyword
-      const response = await fetch(
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        setLoading(true); // Ensure loading state is reset
+        const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)]; // Pick a random keyword
+        const response = await fetch(
           `https://newsapi.org/v2/everything?q=${randomKeyword}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
         );        
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+
+        if (!data.articles || data.articles.length === 0) {
+          setNews([]); // Set to empty if no articles are found
+        } else {
+          setNews(data.articles.slice(0, 8)); // Limit to 8 articles
+        }
+      } catch (error) {
+        console.error("Error fetching news:", error);
+        setNews([]); // Reset news on error
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const data = await response.json();
-
-      if (!data.articles || data.articles.length === 0) {
-        setNews([]); // Set to empty if no articles are found
-      } else {
-        setNews(data.articles.slice(0, 8)); // Limit to 8 articles
-      }
-    } catch (error) {
-      console.error("Error fetching news:", error);
-      setNews([]); // Reset news on error
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchNews();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+    fetchNews();
+  }, []); // Run only once when the component mounts
 
   return (
     <section className={styles.newsSection}>
