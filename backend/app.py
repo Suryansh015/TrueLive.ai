@@ -13,6 +13,9 @@ import subprocess
 import numpy as np
 from scipy.special import softmax
 import onnxruntime as ort
+import requests
+from urllib.parse import quote
+from dotenv import load_dotenv
 
 # Download necessary NLTK data
 nltk.download('punkt')
@@ -34,8 +37,9 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Paths for models
-CLAIM_ONNX_MODEL_PATH = r"models/distilbert_local_model_quantized.onnx"
-VOSK_MODEL_PATH = r"models/vosk-model-small-en-in-0.4"
+CLAIM_ONNX_MODEL_PATH = r"C:\Users\surya\Desktop\Programs\ReactJS\truelive.ai\AI models\distilbert_local_model_quantized.onnx"
+VOSK_MODEL_PATH = r"C:\Users\surya\Desktop\Programs\ReactJS\truelive.ai\AI models\vosk-model-small-en-in-0.4"
+
 
 # Ensure models exist
 if not os.path.exists(VOSK_MODEL_PATH):
@@ -47,6 +51,13 @@ if not os.path.exists(CLAIM_ONNX_MODEL_PATH):
 vosk_model = VoskModel(VOSK_MODEL_PATH)
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 distilbert_session = ort.InferenceSession(CLAIM_ONNX_MODEL_PATH)
+
+# Guardian API configuration (saurav)
+load_dotenv()
+GUARDIAN_API_KEY = os.getenv("GUARDIAN_API_KEY")
+if not GUARDIAN_API_KEY:
+    raise ValueError("GUARDIAN_API_KEY not found/not set")
+GUARDIAN_API_URL = "https://content.guardianapis.com/search"
 
 # Extract and resample audio from video
 def extract_and_resample_audio(video_path, output_audio_path="temp_audio.wav", target_sample_rate=16000):
@@ -112,6 +123,7 @@ def check_claim(claim):
             "confidence": 0
         }
 
+# Function to summarize an article
 def summarize_article(url):
     try:
         article = Article(url)
@@ -133,7 +145,35 @@ def summarize_article(url):
         print(f"Article processing error: {e}")
         return {"error": f"Article processing error: {e}"}
     
+@app.route('/guardian-news', methods=['GET'])
+def fetch_guardian_articles():
+    query = request.args.get('query')  # Extract query from request
+    if not query:
+        return jsonify({"error": "Missing query parameter"}), 400  # Handle missing query
 
+    try:
+        params = {
+            "q": quote(query),  
+            "api-key": GUARDIAN_API_KEY,
+            "show-fields": "trailText",
+            "page-size": 5,
+            "order-by": "relevance"
+        }
+        
+        print("Fetching Guardian API with params:", params)  # Debug: log query params
+
+        response = requests.get(GUARDIAN_API_URL, params=params)
+        response.raise_for_status()
+
+        # Debug: log the full response
+        data = response.json()
+        print("Response from Guardian API:", data)  # Debug: log the full response data
+
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+        
 @app.route('/verify_article', methods=['POST'])
 def verify_article_route():
     data = request.json
@@ -143,9 +183,10 @@ def verify_article_route():
 
     article = summarize_article(url)
     claim_verification = check_claim(f"{article.get('title')} {article.get('summary')}")
+
     return jsonify({
         "article": article, 
-        "claim_verification": claim_verification
+        "claim_verification": claim_verification,
     })
 
 @app.route('/', methods=['GET', 'POST'])
@@ -188,11 +229,5 @@ def summarize_route():
     summary = summarize_article(url)
     return jsonify(summary)
 
-
-
-# Routes remain the same as in the previous code snippet
-
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
-
-
