@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HeroSection.module.css";
-import bgImage from "./BGimage.jpg";
 import { color, motion } from "framer-motion";
 import { auth } from "../Login/firebase";
 import { useNavigate } from "react-router-dom";
@@ -52,11 +51,6 @@ const HeroSection = () => {
     }
   };
 
-  const textVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setIsSignedIn(!!user);
@@ -75,11 +69,7 @@ const HeroSection = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-
-  const redirectToLogin = () => {
-    window.location.href = "/login";
-  };
-
+//====================================================================================================================
   const handleYouTubeAnalysis = async (file) => {
     setIsLoading(true);
     console.log("Selected File:", file); 
@@ -268,8 +258,7 @@ const HeroSection = () => {
       alert("An error occurred while processing the YouTube video.");
     }
   };
-  
-  
+//====================================================================================================================
   const handleArticleVerification = async () => {
     try {
       const response = await fetch("http://127.0.0.1:5000/verify_article", {
@@ -278,6 +267,28 @@ const HeroSection = () => {
         body: JSON.stringify({ url: articleURL }),
       });
       const data = await response.json();
+
+      const articlesResponse = await fetch(
+        `http://127.0.0.1:5000/guardian-news?query=${encodeURIComponent(data.transcription)}`
+      );
+      const articlesData = await articlesResponse.json();
+
+      // Generate HTML for news articles
+      let articlesHTML = "<h4>Related News Articles</h4>";
+      if (articlesData.response && articlesData.response.results.length > 0) {
+        articlesHTML += articlesData.response.results
+          .map(
+            (article) =>
+              `<div class="article">
+                <h5>${article.webTitle}</h5>
+                <p>${article.fields.trailText}</p>
+                <a href="${article.webUrl}" target="_blank">Read more</a>
+              </div>`
+          )
+          .join("");
+      } else {
+        articlesHTML += "<p>No relevant articles found.</p>";
+      }
 
       const articleWindow = window.open("", "_blank", "width=800,height=600");
 articleWindow.document.write(`
@@ -351,8 +362,8 @@ articleWindow.document.write(`
         }
         .speedometer .progress {
           stroke: #2d87f0;
-          stroke-dasharray: 440; /* Circumference of the circle (2πr where r=70) */
-          stroke-dashoffset: 440; /* Initial offset */
+          stroke-dasharray: 440; 
+          stroke-dashoffset: 440; 
           transition: stroke-dashoffset 1.5s ease;
         }
         .speedometer .percentage {
@@ -386,6 +397,7 @@ articleWindow.document.write(`
           <p><strong>Summary:</strong></p>
           <div class="summary-box">${data.article.summary}</div>
         </div>
+        <div class="articles">${articlesHTML}</div>
       </div>
       <script>
   const confidence = ${data.claim_verification.confidence};
@@ -432,12 +444,11 @@ articleWindow.document.write(`
   </html>
 `);
 
-
     } catch (error) {
       console.error("Error verifying article:", error);
     }
   };
-
+//====================================================================================================================
   const handleSummarizeClick = async () => {
     try {
       if (!newsURL) {
@@ -534,7 +545,7 @@ articleWindow.document.write(`
       alert("An error occurred while fetching the summary.");
     }
   };
-
+//====================================================================================================================
   return (
     <section style={{marginTop: "40px"}}>
       <div
