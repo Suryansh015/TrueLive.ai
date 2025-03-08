@@ -1,5 +1,6 @@
 Flask==2.3.2
 flask-cors>=3.0.0
+tokenizers==0.14.1
 transformers==4.31.0
 torch>=2.1.0
 vosk==0.3.30
@@ -8,4 +9,3 @@ newspaper3k==0.2.8
 nltk==3.8.1
 textblob==0.15.3
 werkzeug==2.3.7
-tokenizers==0.15.2
