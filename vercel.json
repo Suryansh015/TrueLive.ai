@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "backend/app.py",
@@ -11,5 +10,6 @@
       "src": "/(.*)",
       "dest": "backend/app.py"
     }
-  ]
+  ],
+  "buildCommand": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && pip install -r requirements.txt"
 }
