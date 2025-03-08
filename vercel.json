@@ -11,5 +11,5 @@
       "dest": "backend/app.py"
     }
   ],
-  "buildCommand": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && pip install -r requirements.txt"
+  "buildCommand": "pip install --no-cache-dir --only-binary :all: -r requirements.txt"
 }
