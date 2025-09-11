@@ -5,7 +5,7 @@
 <br>
 
 <p align="center">
-  <img src="images/Landing_page.jpg" alt="Landing Page" title="Landing Page Screenshot" width="750">
+  <img src="images/Landing_page.png" alt="Landing Page" title="Landing Page Screenshot" width="750">
 </p>
 
 
@@ -28,10 +28,10 @@
   
   
 <p align="center">
-  <img src="images/dashboard.jpg" alt= "dashboard" width="90%" />
+  <img src="images/dashboard.png" alt= "dashboard" width="90%" />
 </p>
 <p align="center">
-  <img src="images/yt_verify.jpg" alt= "yt window" width="90%" />
+  <img src="images/yt_verify.png" alt= "yt window" width="90%" />
 </p>
 
 ### Usage
