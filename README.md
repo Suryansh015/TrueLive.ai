@@ -28,7 +28,10 @@
   
   
 <p align="center">
-  <img src="images/get_started.jpg" alt= "get_started" width="90%" />
+  <img src="images/dashboard.jpg" alt= "dashboard" width="90%" />
+</p>
+<p align="center">
+  <img src="images/yt_verify.jpg" alt= "yt window" width="90%" />
 </p>
 
 ### Usage
