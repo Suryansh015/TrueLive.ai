@@ -3,9 +3,9 @@
   margin-top: 0px;
   background: linear-gradient(
       to left, 
-      rgb(0, 0, 0), /* Left side darker */
-      rgb(0, 0, 0), /* Main Color (lighter center) */
-      rgb(0, 34, 75) /* Right side darker */
+      rgb(0, 0, 0), 
+      rgb(0, 0, 0), 
+      rgb(0, 34, 75) 
   );
   padding: 20px;
   text-align: center;
@@ -20,54 +20,66 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3); /* Darker blurred effect */
+    background: rgba(0, 0, 0, 0.3); 
     filter: blur(3px);
-    z-index: -1; /* Keep blur effect behind content */
+    z-index: -1; 
 }
 
 .newsList {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns in one row */
-  gap: 20px; /* Space between items */
-  padding: 0 20px; /* Padding from left and right for the whole grid */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 0 20px;
+  align-items: stretch;
 }
 
 .newsItem {
   border: 1px solid #ffef3f;
   border-radius: 20px;
-  padding: 15px 20px; /* 15px top/bottom and 20px left/right */
+  padding: 15px 20px;
   background-color: transparent;
-  text-align: center; /* Center content */
+  text-align: center;
   margin-bottom: 10px;
+
   display: flex;
-  flex-direction: column; /* Stack content vertically */
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;        
+  min-height: 420px;  
+  box-sizing: border-box;
 }
 
 .newsItem h4 {
   font-size: 18px;
   margin-bottom: 10px;
+  margin-top: 0px;
 }
 
 .newsItem p {
   font-size: 14px;
-  color: #555;
+  color: #aaa;
+  max-height: 7em;
+  line-height: 1.5;
+  overflow: hidden;
 }
+
 
 .newsItem a {
   font-size: 14px;
   color: #007BFF;
   text-decoration: none;
+  margin-top: 10px;
 }
 
 .newsItem a:hover {
   text-decoration: underline;
 }
 
-/* Image styling */
 .imageContainer {
   overflow: hidden;
   border-radius: 8px;
-  margin-bottom: 15px; /* Space between image and text */
+  margin-bottom: 15px;
 }
 
 .newsImage {
