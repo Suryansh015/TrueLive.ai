@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import styles from "./TrendingNews.module.css";
 
 const TrendingNews = () => {
-  const [news, setNews] = useState([]); // State to store news data
-  const [loading, setLoading] = useState(true); // State to handle loading
-  const keywords = ["technology", "health", "sports", "business", "science"]; 
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const keywords = ["technology", "health", "sports", "business", "science"];
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        setLoading(true); // Ensure loading state is reset
-        const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)]; // Pick a random keyword
+        setLoading(true);
+        const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)];
         const response = await fetch(
-          `https://newsapi.org/v2/everything?q=${randomKeyword}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
-        );        
+          `https://gnews.io/api/v4/search?q=${randomKeyword}&lang=en&max=8&apikey=${process.env.REACT_APP_GNEWS_API_KEY}`
+        );
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -22,26 +22,24 @@ const TrendingNews = () => {
         const data = await response.json();
 
         if (!data.articles || data.articles.length === 0) {
-          setNews([]); // Set to empty if no articles are found
+          setNews([]);
         } else {
-          setNews(data.articles.slice(0, 8)); // Limit to 8 articles
+          setNews(data.articles); // Already max=8
         }
       } catch (error) {
         console.error("Error fetching news:", error);
-        setNews([]); // Reset news on error
+        setNews([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchNews();
-  }, []); // Run only once when the component mounts
+  }, []);
 
   return (
     <section className={styles.newsSection}>
-      <h3 style={{
-        fontSize: 30
-      }}>Trending News</h3>
+      <h3 style={{ fontSize: 30 }}>Trending News</h3>
       {loading ? (
         <p>Loading news...</p>
       ) : (
@@ -52,9 +50,9 @@ const TrendingNews = () => {
             news.map((article, index) => (
               <div key={index} className={styles.newsItem}>
                 <div className={styles.imageContainer}>
-                  {article.urlToImage && (
+                  {article.image && (
                     <img
-                      src={article.urlToImage}
+                      src={article.image}
                       alt={article.title}
                       className={styles.newsImage}
                     />
